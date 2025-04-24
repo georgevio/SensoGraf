@@ -1,0 +1,67 @@
+version: '3.8'
+
+services:
+  mqtt-broker:
+    image: eclipse-mosquitto:latest
+    container_name: mqtt-broker
+    ports:
+      - "1883:1883"  # MQTT Port for external devices
+      - "9001:9001"  # Optional: WebSocket Port for MQTT
+    volumes:
+      - ./mosquitto.conf:/mosquitto/config/mosquitto.conf  # Mount custom config
+      - mosquitto_data:/mosquitto/data
+      - mosquitto_config:/mosquitto/config
+    restart: always  # Auto-restart container
+
+  influxdb:
+    image: influxdb:1.8
+    container_name: influxdb
+    ports:
+      - "8086:8086"
+    volumes:
+      - influxdb_data:/var/lib/influxdb
+    environment:
+      - INFLUXDB_DB=iot_data
+    restart: always  # Auto-restart container
+
+  mqtt-to-influxdb:
+    image: telegraf:latest
+    container_name: mqtt-to-influxdb
+    depends_on:
+      - mqtt-broker
+      - influxdb
+    volumes:
+      - ./telegraf.conf:/etc/telegraf/telegraf.conf:ro
+    restart: always  # Auto-restart container
+
+  grafana:
+    image: grafana/grafana:latest
+    container_name: grafana
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_USER=admin
+      - GF_SECURITY_ADMIN_PASSWORD=admin
+      - GF_INSTALL_PLUGINS=briangann-gauge-panel  # Install ePict panel plugin
+    depends_on:
+      - influxdb
+    volumes:
+      - grafana_data:/var/lib/grafana
+    restart: always  # Auto-restart container
+
+  iot-simulator:
+    build:
+      context: .
+    container_name: iot-simulator
+    depends_on:
+      - mqtt-broker
+    volumes:
+      - ./iot_data_simulator_mqtt.py:/app/iot_data_simulator_mqtt.py
+    command: ["python", "/app/iot_data_simulator_mqtt.py"]
+    restart: always  # Auto-restart container
+
+volumes:
+  mosquitto_data:
+  mosquitto_config:
+  influxdb_data:
+  grafana_data:
