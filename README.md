@@ -15,11 +15,11 @@ This repository contains a collection of Dockerized services and scripts to simu
 
 ## Overview
 This system simulates IoT devices using MQTT, stores the data in InfluxDB, and visualizes it in Grafana. The setup includes:
-- **MQTT Broker**: For IoT device communication.
-- **InfluxDB**: Time-series database for data storage.
-- **Telegraf**: Intermediary for ingesting MQTT data into InfluxDB.
-- **Grafana**: Visualization and monitoring platform.
-- **IoT Simulator**: Python script to simulate IoT devices sending data to the MQTT broker.
+- 📡 **MQTT Broker**: For IoT device communication.
+- 🗄️ **InfluxDB**: Time-series database for data storage.
+- 🔌 **Telegraf**: Intermediary for ingesting MQTT data into InfluxDB.
+- 📊 **Grafana**: Visualization and monitoring platform.
+- 🐍 **IoT Simulator**: Python script to simulate IoT devices sending data to the MQTT broker.
 
 ---
 
