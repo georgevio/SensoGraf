@@ -1,0 +1,331 @@
+{
+  "annotations": {
+    "list": [
+      {
+        "builtIn": 1,
+        "datasource": {
+          "type": "grafana",
+          "uid": "-- Grafana --"
+        },
+        "enable": true,
+        "hide": true,
+        "iconColor": "rgba(0, 211, 255, 1)",
+        "name": "Annotations & Alerts",
+        "target": {
+          "limit": 100,
+          "matchAny": false,
+          "tags": [],
+          "type": "dashboard"
+        },
+        "type": "dashboard"
+      }
+    ]
+  },
+  "description": "temperatures and pressure from 2 points",
+  "editable": true,
+  "fiscalYearStartMonth": 0,
+  "graphTooltip": 0,
+  "id": 1,
+  "links": [],
+  "panels": [
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "dejyqckx3s8aob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "decimals": 2,
+          "mappings": [],
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurembar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 0,
+        "y": 0
+      },
+      "id": 3,
+      "options": {
+        "allowNeedleCrossLimits": true,
+        "animateNeedleValueTransition": true,
+        "animateNeedleValueTransitionSpeed": 100,
+        "edgeWidth": 0.05,
+        "gaugeRadius": 0,
+        "innerColor": "#ffffff",
+        "markerEndEnabled": false,
+        "markerEndShape": "arrow",
+        "markerStartEnabled": false,
+        "markerStartShape": "circle",
+        "maxNeedleAngle": 320,
+        "maxTickAngle": 320,
+        "maxValue": 1100,
+        "minValue": 850,
+        "needleColor": "#0099cc",
+        "needleCrossLimitDegrees": 10,
+        "needleLengthNeg": 0,
+        "needleTickGap": 0.05,
+        "needleWidth": 5,
+        "operatorName": "mean",
+        "outerEdgeColor": "#0099cc",
+        "padding": 0.05,
+        "pivotColor": "#999999",
+        "pivotRadius": 0.1,
+        "showThresholdBandLowerRange": true,
+        "showThresholdBandMiddleRange": true,
+        "showThresholdBandOnGauge": false,
+        "showThresholdBandUpperRange": true,
+        "showThresholdStateOnBackground": false,
+        "showThresholdStateOnValue": false,
+        "tickEdgeGap": 0.05,
+        "tickFont": "Inter",
+        "tickLabelColor": "#000000",
+        "tickLabelFontSize": 18,
+        "tickLengthMaj": 0.15,
+        "tickLengthMin": 0.05,
+        "tickMajorColor": "#0099CC",
+        "tickMapConfig": {
+          "tickMaps": []
+        },
+        "tickMinorColor": "#000000",
+        "tickSpacingMajor": 10,
+        "tickSpacingMinor": 1,
+        "tickWidthMajor": 5,
+        "tickWidthMinor": 1,
+        "ticknessGaugeBasis": 200,
+        "unitsLabelColor": "#000000",
+        "valueFont": "Inter",
+        "valueFontSize": 22,
+        "valueYOffset": 0,
+        "zeroNeedleAngle": 40,
+        "zeroTickAngle": 40
+      },
+      "pluginVersion": "2.0.1",
+      "targets": [
+        {
+          "query": "SELECT house_pressure AS house FROM mqtt_consumer ",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "House (press)",
+      "transparent": true,
+      "type": "briangann-gauge-panel"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "dejyqckx3s8aob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "displayName": "Balcony",
+          "mappings": [],
+          "max": 1050,
+          "min": 850,
+          "noValue": "err",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "pressurembar"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 5,
+        "x": 6,
+        "y": 0
+      },
+      "id": 2,
+      "options": {
+        "minVizHeight": 75,
+        "minVizWidth": 75,
+        "orientation": "auto",
+        "reduceOptions": {
+          "calcs": [
+            "lastNotNull"
+          ],
+          "fields": "",
+          "values": false
+        },
+        "showThresholdLabels": false,
+        "showThresholdMarkers": true,
+        "sizing": "auto",
+        "text": {
+          "titleSize": 1
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "query": "SELECT balcony_pressure AS balcony FROM mqtt_consumer ",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "Balcony (press)",
+      "transparent": true,
+      "type": "gauge"
+    },
+    {
+      "datasource": {
+        "type": "influxdb",
+        "uid": "dejyqckx3s8aob"
+      },
+      "fieldConfig": {
+        "defaults": {
+          "color": {
+            "mode": "palette-classic"
+          },
+          "custom": {
+            "axisBorderShow": false,
+            "axisCenteredZero": false,
+            "axisColorMode": "text",
+            "axisLabel": "",
+            "axisPlacement": "auto",
+            "barAlignment": 0,
+            "barWidthFactor": 0.6,
+            "drawStyle": "line",
+            "fillOpacity": 0,
+            "gradientMode": "none",
+            "hideFrom": {
+              "legend": false,
+              "tooltip": false,
+              "viz": false
+            },
+            "insertNulls": false,
+            "lineInterpolation": "linear",
+            "lineStyle": {
+              "fill": "solid"
+            },
+            "lineWidth": 0.5,
+            "pointSize": 3,
+            "scaleDistribution": {
+              "type": "linear"
+            },
+            "showPoints": "always",
+            "spanNulls": false,
+            "stacking": {
+              "group": "A",
+              "mode": "none"
+            },
+            "thresholdsStyle": {
+              "mode": "off"
+            }
+          },
+          "mappings": [],
+          "noValue": "err",
+          "thresholds": {
+            "mode": "absolute",
+            "steps": [
+              {
+                "color": "green"
+              },
+              {
+                "color": "red",
+                "value": 80
+              }
+            ]
+          },
+          "unit": "celsius"
+        },
+        "overrides": []
+      },
+      "gridPos": {
+        "h": 8,
+        "w": 12,
+        "x": 11,
+        "y": 0
+      },
+      "id": 1,
+      "options": {
+        "legend": {
+          "calcs": [],
+          "displayMode": "list",
+          "placement": "bottom",
+          "showLegend": true
+        },
+        "tooltip": {
+          "hideZeros": false,
+          "mode": "single",
+          "sort": "none"
+        }
+      },
+      "pluginVersion": "11.6.1",
+      "targets": [
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dejyqckx3s8aob"
+          },
+          "query": "SELECT balcony_temperature AS balcony FROM mqtt_consumer \n",
+          "rawQuery": true,
+          "refId": "A",
+          "resultFormat": "time_series"
+        },
+        {
+          "datasource": {
+            "type": "influxdb",
+            "uid": "dejyqckx3s8aob"
+          },
+          "hide": false,
+          "query": "SELECT house_temperature AS house FROM mqtt_consumer",
+          "rawQuery": true,
+          "refId": "B",
+          "resultFormat": "time_series"
+        }
+      ],
+      "title": "Temperatures",
+      "type": "timeseries"
+    }
+  ],
+  "preload": false,
+  "refresh": "1m",
+  "schemaVersion": 41,
+  "tags": [],
+  "templating": {
+    "list": []
+  },
+  "time": {
+    "from": "now-5m",
+    "to": "now"
+  },
+  "timepicker": {
+    "refresh_intervals": [
+      "1m"
+    ]
+  },
+  "timezone": "browser",
+  "title": "IoT Data",
+  "uid": "aejyve48qmolcb",
+  "version": 18
+}

@@ -1,0 +1,7 @@
+apiVersion: 1
+providers:
+  - name: 'IoT Monitoring Dashboard'
+    folder: ''
+    type: file
+    options:
+      path: /etc/grafana/provisioning/dashboards/iot_dashboard.json
