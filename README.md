@@ -50,8 +50,8 @@ The architecture consists of the following containers and services:
 ### Steps
 1. Clone the repository:
    ```bash
-   git clone https://github.com/<your-repo>.git
-   cd <your-repo>
+   git clone https://github.com/georgevio/SensoGraf.git
+   cd SensoGraf
    ```
 2. Build and start the Docker containers:
    ```bash
